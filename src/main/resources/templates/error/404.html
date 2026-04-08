@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <head th:replace="~{fragments/header :: head(${pageTitle})}"></head>
+    <title>Errore 404 - Pagina non trovata</title>
+</head>
+<body class="bg-light">
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+</header>
+<main class="d-flex ">
+    
+
+    <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center p-5">
+        <img th:src="@{/images/404.png}" alt="Pagina non trovata" class="img-fluid img-error mb-4">
+
+        <div class="text-center">
+            <a th:href="@{/}" class="btn btn-primary btn-lg">Torna alla Home</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

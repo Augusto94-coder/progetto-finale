@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/header :: head('Dashboard')}"></head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container page-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">Dashboard</h1>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h2 class="h5">Utente autenticato</h2>
+                        <p class="mb-1">
+                            <strong>Username:</strong>
+                            <span th:text="${username}"></span>
+                        </p>
+
+                        <p class="mb-2"><strong>Ruoli:</strong></p>
+                        <ul class="mb-0">
+                            <li th:each="role : ${roles}" th:if="${#strings.startsWith(role.authority, 'ROLE_')}"
+                                th:text="${role.authority}">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h2 class="h5">Collegamenti rapidi</h2>
+
+                        <div class="d-grid gap-2">
+                            <a sec:authorize="hasAnyRole('ADMIN','ORGANIZER')" th:href="@{/organizer/events}"
+                                class="btn btn-primary">
+                                Gestione eventi
+                            </a>
+
+                            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/users}"
+                                class="btn btn-outline-secondary">
+                                Gestione utenti
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

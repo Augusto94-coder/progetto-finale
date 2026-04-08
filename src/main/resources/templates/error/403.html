@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <head th:replace="~{fragments/header :: head(${pageTitle})}"></head>
+    <title>Errore 403 - Accesso Negato</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+</header>
+<main class="d-flex ">
+    
+    <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center ">
+        <img th:src="@{/images/403.png}" alt="Accesso Negato" class="img-fluid img-error mb-4">
+
+        <div class="text-center">
+            <a th:href="@{/}" class="btn btn-primary btn-lg">Torna alla Home</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

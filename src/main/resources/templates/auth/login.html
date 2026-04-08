@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: head('Login back office')}"></head>
+
+<body>
+    <div class="container page-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-4 text-center">Login</h1>
+
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Credenziali non valide.
+                        </div>
+
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            Logout effettuato correttamente.
+                        </div>
+
+                        <form th:action="@{/login}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input id="username" name="username" type="text" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input id="password" name="password" type="password" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Accedi</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

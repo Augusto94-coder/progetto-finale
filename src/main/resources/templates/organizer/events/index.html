@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/header :: head('Gestione eventi')}"></head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container page-wrapper">
+        <div th:replace="~{fragments/alerts :: alerts}"></div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Gestione eventi</h1>
+            <a th:href="@{/organizer/events/create}" class="btn btn-primary">Nuovo evento</a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Titolo</th>
+                                <th>Città</th>
+                                <th>Indirizzo</th>
+                                <th>Inizio</th>
+                                <th>Fine</th>
+                                <th>Creato da</th>
+                                <th>Categorie</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${#lists.isEmpty(events)}">
+                                <td colspan="9" class="text-center text-muted">Nessun evento disponibile.</td>
+                            </tr>
+
+                            <tr th:each="event : ${events}">
+                                <td th:text="${event.id}"></td>
+                                <td th:text="${event.title}"></td>
+                                <td th:text="${event.city}"></td>
+                                <td th:text="${event.address}"></td>
+                                <td th:text="${#temporals.format(event.startAt, 'dd/MM/yyyy HH:mm')}"></td>
+                                <td th:text="${#temporals.format(event.endAt, 'dd/MM/yyyy HH:mm')}"></td>
+                                <td th:text="${event.createdByUser != null ? event.createdByUser.username : 'N/D'}">
+                                </td>
+                                <td>
+                                    <span th:if="${#lists.isEmpty(event.categories)}" class="text-muted">Nessuna</span>
+                                    <span th:each="cat, stat : ${event.categories}">
+                                        <span class="badge text-bg-secondary" th:text="${cat.name}"></span>
+                                        <span th:if="${!stat.last}"></span>
+                                    </span>
+                                </td>
+                                <td class="table-actions">
+                                    <a th:href="@{/organizer/events/edit/{id}(id=${event.id})}"
+                                        class="btn btn-sm btn-outline-primary">
+                                        Modifica
+                                    </a>
+
+                                    <form th:action="@{/organizer/events/delete/{id}(id=${event.id})}" method="post"
+                                        class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Confermi la cancellazione?')">
+                                            Elimina
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

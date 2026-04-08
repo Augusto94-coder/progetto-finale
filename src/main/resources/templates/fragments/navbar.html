@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/dashboard}">Event Manager BO</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="hasAnyRole('ADMIN','ORGANIZER')">
+                        <a class="nav-link" th:href="@{/organizer/events}">Eventi</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center text-white me-3">
+                    <span sec:authentication="name"></span>
+                </div>
+
+                <form th:action="@{/logout}" method="post" class="d-flex">
+                    <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
