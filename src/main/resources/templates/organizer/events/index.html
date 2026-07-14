@@ -53,12 +53,12 @@
                                     </span>
                                 </td>
                                 <td class="table-actions">
-                                    <a th:href="@{/organizer/events/edit/{id}(id=${event.id})}"
+                                    <a th:href="@{/organizer/events/{id}/edit(id=${event.id})}"
                                         class="btn btn-sm btn-outline-primary">
                                         Modifica
                                     </a>
 
-                                    <form th:action="@{/organizer/events/delete/{id}(id=${event.id})}" method="post"
+                                    <form th:action="@{/organizer/events/{id}/delete(id=${event.id})}" method="post"
                                         class="d-inline">
                                         <button type="submit" class="btn btn-sm btn-outline-danger"
                                             onclick="return confirm('Confermi la cancellazione?')">

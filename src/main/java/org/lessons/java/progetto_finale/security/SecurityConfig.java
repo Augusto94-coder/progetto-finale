@@ -43,15 +43,6 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/api/public/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/organizer/**").hasAnyRole("ADMIN", "ORGANIZER")
-                        /*
-                         * .requestMatchers("/api/public/**").permitAll()
-                         * .requestMatchers(HttpMethod.POST, "/api/events/**").hasAnyRole("ADMIN",
-                         * "ORGANIZER")
-                         * .requestMatchers(HttpMethod.PUT, "/api/events/**").hasAnyRole("ADMIN",
-                         * "ORGANIZER")
-                         * .requestMatchers(HttpMethod.DELETE, "/api/events/**").hasAnyRole("ADMIN",
-                         * "ORGANIZER")
-                         */
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
